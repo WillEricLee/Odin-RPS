@@ -17,6 +17,8 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+	computerSelection = computerSelection[0].toUpperCase() + computerSelection.slice(1).toLowerCase();
+	playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
 	let winner = false;
 	let tie = false;
 	switch(playerSelection) {
