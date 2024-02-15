@@ -76,3 +76,10 @@ function playRound(playerSelection, computerSelection) {
 	}
 	return 'wawa';	
 }
+
+function playGame() {
+	for (let i = 0; i<5; i++) {
+		console.log(playRound(prompt("Enter your move: "), getComputerChoice()));
+	}
+
+}
