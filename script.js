@@ -69,17 +69,57 @@ function playRound(playerSelection, computerSelection) {
 		return "Tie, you both showed " + playerSelection;
 	}
 	else if (winner) {
+		playerScore +=1;
 		return "You won, your " + playerSelection + " beats " + computerSelection;
 	}
 	else {
+		computerScore +=1;
 		return "You lost, your " + playerSelection + " loses to " + computerSelection;
 	}
-	return 'wawa';	
 }
 
-function playGame() {
-	for (let i = 0; i<5; i++) {
-		console.log(playRound(prompt("Enter your move: "), getComputerChoice()));
+function playGame(choice) {
+	const newResult = document.createElement('div');
+	newResult.textContent = playRound(choice, getComputerChoice());
+	roundWinnerBox.appendChild(newResult);
+	overallWinnerBox.textContent = "";
+
+	const playerCounter = document.createElement('div');
+	const computerCounter = document.createElement('div');
+	playerCounter.textContent = "Player wins: " + playerScore;
+	computerCounter.textContent = "Computer wins: " + computerScore;
+
+	scoreBox.textContent = "";
+	scoreBox.appendChild(playerCounter);
+	scoreBox.appendChild(computerCounter);
+
+	if (playerScore == 5) {
+		roundWinnerBox.textContent = "";
+		scoreBox.textContent = "";
+		overallWinnerBox.textContent = "Player wins with 5 wins!";
+		playerScore = 0;
+		computerScore = 0;
 	}
-
+	else if (computerScore == 5) {
+		roundWinnerBox.textContent = "";
+		scoreBox.textContent = "";
+		overallWinnerBox.textContent = "Computer wins with 5 wins!";
+		playerScore = 0;
+		computerScore = 0;
+	}
 }
+
+let playerScore = 0, computerScore = 0;
+
+const rockButton = document.querySelector('#Rock');
+const paperButton = document.querySelector('#Paper');
+const scissorsButton = document.querySelector('#Scissors');
+
+const roundWinnerBox = document.querySelector('#roundWinner');
+const scoreBox = document.querySelector('#score');
+const overallWinnerBox = document.querySelector('#overallWinner');
+
+
+rockButton.addEventListener('click', () => playGame('Rock'));
+paperButton.addEventListener('click', () => playGame('Paper'));
+scissorsButton.addEventListener('click', () => playGame('Scissors'));
